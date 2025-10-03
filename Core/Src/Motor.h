@@ -6,7 +6,7 @@
 #define MOTOR_H
 #include <stdint.h>
 
-class M3508_Motor {
+class M3508Motor {
 private:
     const float ratio;                  //电机减速比
 
@@ -19,12 +19,12 @@ private:
     float current = 0.f;                // A 反馈转矩电流
     float temperature = 0.f;            // °C 反馈电机温度
 
-    static constexpr uint16_t rx_ecd_angle_ = 8191;
-    static constexpr float res_ecd_angle_ = 360.f;      // deg
-    static constexpr int16_t rx_rotate_speed_ = 1;      // rpm
-    static constexpr float res_rotate_speed_ = 60.f;    // dps
-    static constexpr int16_t rx_max_current_ = 16384;
-    static constexpr float res_max_current_ = 20.f;     // A
+    static constexpr uint16_t rx_ecd_angle = 8191;
+    static constexpr float res_ecd_angle = 360.f;      // deg
+    static constexpr int16_t rx_rotate_speed = 1;      // rpm
+    static constexpr float res_rotate_speed = 60.f;    // dps
+    static constexpr int16_t rx_max_current = 16384;
+    static constexpr float res_max_current = 20.f;     // A
 
     template<class T1, class T2>
     static T2 linear_mapping(T1 org, T1 org_max, T2 res_max) {
@@ -33,7 +33,7 @@ private:
 
     static float normalize_angle(float angle);
 public:
-    explicit M3508_Motor(float _ratio): ratio(_ratio) {};
+    explicit M3508Motor(float _ratio): ratio(_ratio) {};
     void can_RxMsgCallback(const uint8_t rx_data[8]);
 };
 
