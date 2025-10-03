@@ -21,7 +21,7 @@ private:
 
     static constexpr uint16_t rx_ecd_angle = 8191;
     static constexpr float res_ecd_angle = 360.f;      // deg
-    static constexpr int16_t rx_rotate_speed = 1;      // rpm
+    static constexpr int16_t rx_rotate_speed = 1;     // rpm
     static constexpr float res_rotate_speed = 60.f;    // dps
     static constexpr int16_t rx_max_current = 16384;
     static constexpr float res_max_current = 20.f;     // A
@@ -31,10 +31,10 @@ private:
         return T2(org) / org_max * res_max;
     }
 
-    static float normalize_angle(float angle);
+    static float normalize_angle(float angle, bool has_direction=false);
 public:
     explicit M3508Motor(float _ratio): ratio(_ratio) {};
-    void can_RxMsgCallback(const uint8_t rx_data[8]);
+    void read_RxMsg(const uint8_t rx_data[8]);
 };
 
 #endif //MOTOR_H
