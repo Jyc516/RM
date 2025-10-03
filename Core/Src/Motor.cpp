@@ -35,7 +35,7 @@ void M3508Motor::read_RxMsg(const uint8_t rx_data[]) {
     angle = normalize_angle(angle + delta_angle);
 
     int16_t rx_speed = rx_data[2] << 8 | rx_data[3];
-    rotate_speed =linear_mapping(rx_speed, rx_rotate_speed, res_rotate_speed);
+    rotate_speed = linear_mapping(rx_speed, rx_rotate_speed, res_rotate_speed);
 
     int16_t rx_current = rx_data[4] << 8 | rx_data[5];
     current = linear_mapping(rx_current, rx_max_current, res_max_current);

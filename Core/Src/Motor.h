@@ -22,7 +22,7 @@ private:
     static constexpr uint16_t rx_ecd_angle = 8191;
     static constexpr float res_ecd_angle = 360.f;      // deg
     static constexpr int16_t rx_rotate_speed = 1;     // rpm
-    static constexpr float res_rotate_speed = 60.f;    // dps
+    static constexpr float res_rotate_speed = 6.f;    // dps
     static constexpr int16_t rx_max_current = 16384;
     static constexpr float res_max_current = 20.f;     // A
 
