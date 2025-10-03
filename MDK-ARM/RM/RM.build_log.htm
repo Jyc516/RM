@@ -1,0 +1,138 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: YuChen Jiang, SJTU, LIC=WHYH9-4UU5V-JJJ6S-LRZE7-HRE7Z-9VXWB
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\Projects\RM\RM\MDK-ARM\RM.uvprojx
+Project File Date:  10/03/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'RM'
+../Core/Src/Motor.cpp(5): warning: In file included from...
+../Core/Src/Motor.h(14): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float angle = 0.f;                  // deg 输出端累计转动角度
+                ^
+../Core/Src/Motor.h(15): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float delta_angle = 0.f;            // deg 输出端新转动角度
+                      ^
+../Core/Src/Motor.h(16): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float ecd_angle = 0.f;              // deg 当前编码器转动角度
+                    ^
+../Core/Src/Motor.h(17): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float last_ecd_angle = 0.f;         // deg 上次编码器转动角度
+                         ^
+../Core/Src/Motor.h(18): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float delta_ecd_angle = 0.f;        // deg 编码器端新转动角度
+                          ^
+../Core/Src/Motor.h(19): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float rotate_speed = 0.f;           // dps 反馈转子速度
+                       ^
+../Core/Src/Motor.h(20): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float current = 0.f;                // A 反馈转矩电流
+                  ^
+../Core/Src/Motor.h(21): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float temperature = 0.f;            // °C 反馈电机温度
+                      ^
+8 warnings generated.
+compiling Motor.cpp...
+compiling stm32f4xx_hal_rcc.c...
+compiling can.c...
+compiling tim.c...
+compiling main.c...
+compiling gpio.c...
+compiling stm32f4xx_hal_msp.c...
+assembling startup_stm32f427xx.s...
+compiling stm32f4xx_it.c...
+../Core/Src/callback.cpp(7): warning: In file included from...
+../Core/Src/Motor.h(14): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float angle = 0.f;                  // deg 输出端累计转动角度
+                ^
+../Core/Src/Motor.h(15): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float delta_angle = 0.f;            // deg 输出端新转动角度
+                      ^
+../Core/Src/Motor.h(16): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float ecd_angle = 0.f;              // deg 当前编码器转动角度
+                    ^
+../Core/Src/Motor.h(17): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float last_ecd_angle = 0.f;         // deg 上次编码器转动角度
+                         ^
+../Core/Src/Motor.h(18): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float delta_ecd_angle = 0.f;        // deg 编码器端新转动角度
+                          ^
+../Core/Src/Motor.h(19): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float rotate_speed = 0.f;           // dps 反馈转子速度
+                       ^
+../Core/Src/Motor.h(20): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float current = 0.f;                // A 反馈转矩电流
+                  ^
+../Core/Src/Motor.h(21): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float temperature = 0.f;            // °C 反馈电机温度
+                      ^
+8 warnings generated.
+compiling callback.cpp...
+compiling stm32f4xx_hal_can.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling stm32f4xx_hal_flash_ramfunc.c...
+compiling stm32f4xx_hal_flash.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling stm32f4xx_hal_dma_ex.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_dma.c...
+compiling stm32f4xx_hal.c...
+compiling stm32f4xx_hal_exti.c...
+compiling stm32f4xx_hal_cortex.c...
+compiling system_stm32f4xx.c...
+compiling stm32f4xx_hal_tim_ex.c...
+compiling stm32f4xx_hal_tim.c...
+linking...
+Program Size: Code=6908 RO-data=476 RW-data=76 ZI-data=1804  
+FromELF: creating hex file...
+"RM\RM.axf" - 0 Error(s), 16 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.16.0.pack
+                Keil.STM32F4xx_DFP.2.16.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_RM
+  C:/Users/JiangYC/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/JiangYC/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>
