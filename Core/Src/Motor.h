@@ -27,11 +27,11 @@ private:
     static constexpr float res_max_current_ = 20.f;     // A
 
     template<class T1, class T2>
-    T2 linear_mapping(T1 org, T1 org_max, T2 res_max) {
+    static T2 linear_mapping(T1 org, T1 org_max, T2 res_max) {
         return T2(org) / org_max * res_max;
     }
 
-    float normalize_angle(float angle);
+    static float normalize_angle(float angle);
 public:
     explicit M3508_Motor(float _ratio): ratio(_ratio) {};
     void can_RxMsgCallback(const uint8_t rx_data[8]);
