@@ -6,6 +6,8 @@
 #define MOTOR_H
 #include <stdint.h>
 
+#include "PID.h"
+
 class M3508Motor {
 private:
     const float ratio;                  //电机减速比
@@ -20,11 +22,11 @@ private:
     float temperature = 0.f;            // °C 反馈电机温度
 
     static constexpr uint16_t rx_ecd_angle = 8191;
-    static constexpr float res_ecd_angle = 360.f;      // deg
+    static constexpr float res_ecd_angle = 360.f;     // deg
     static constexpr int16_t rx_rotate_speed = 1;     // rpm
     static constexpr float res_rotate_speed = 6.f;    // dps
     static constexpr int16_t rx_max_current = 16384;
-    static constexpr float res_max_current = 20.f;     // A
+    static constexpr float res_max_current = 20.f;    // A
 
     template<class T1, class T2>
     static T2 linear_mapping(T1 org, T1 org_max, T2 res_max) {

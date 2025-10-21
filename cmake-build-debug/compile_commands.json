@@ -13,6 +13,12 @@
 },
 {
   "directory": "D:/Projects/RM/RM/cmake-build-debug",
+  "command": "C:\\Users\\JiangYC\\AppData\\Local\\Programs\\CLion\\bin\\mingw\\bin\\g++.exe -DDEBUG -DSTM32F427xx -DUSE_HAL_DRIVER -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Core/Inc -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/STM32F4xx_HAL_Driver/Inc -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/CMSIS/Include -g -fdiagnostics-color=always -o CMakeFiles\\RM.dir\\Core\\Src\\PID.cpp.obj -c D:\\Projects\\RM\\RM\\Core\\Src\\PID.cpp",
+  "file": "D:\\Projects\\RM\\RM\\Core\\Src\\PID.cpp",
+  "output": "CMakeFiles\\RM.dir\\Core\\Src\\PID.cpp.obj"
+},
+{
+  "directory": "D:/Projects/RM/RM/cmake-build-debug",
   "command": "C:\\Users\\JiangYC\\AppData\\Local\\Programs\\CLion\\bin\\mingw\\bin\\gcc.exe -DDEBUG -DSTM32F427xx -DUSE_HAL_DRIVER -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Core/Inc -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/STM32F4xx_HAL_Driver/Inc -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -ID:/Projects/RM/RM/cmake/stm32cubemx/../../Drivers/CMSIS/Include -g -std=gnu11 -fdiagnostics-color=always -o CMakeFiles\\RM.dir\\Core\\Src\\main.c.obj -c D:\\Projects\\RM\\RM\\Core\\Src\\main.c",
   "file": "D:\\Projects\\RM\\RM\\Core\\Src\\main.c",
   "output": "CMakeFiles\\RM.dir\\Core\\Src\\main.c.obj"
