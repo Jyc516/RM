@@ -11,14 +11,14 @@ extern "C" {
 
 class PID {
 private:
-    constexpr float kp;
-    constexpr float ki;
-    constexpr float kd;
+    const float kp;
+    const float ki;
+    const float kd;
 
-    constexpr float d_filter;  // 对d一阶线性滤波
-    constexpr int i_iter;      // 循环链表大小
-    constexpr float i_max;     // 限制误差积分大小
-    float out_max;             // 限制输出大小，可被set_out_max()修改，0.f代表没有限制
+    const float d_filter;       // 对d一阶线性滤波
+    const int i_iter;           // 循环链表大小
+    const float i_max;          // 限制误差积分大小
+    float out_max;              // 限制输出大小，可被set_out_max()修改，0.f代表没有限制
 
     float ref;
     float fdb;

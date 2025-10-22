@@ -21,7 +21,6 @@
 #include "can.h"
 #include "tim.h"
 #include "gpio.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -47,7 +46,7 @@
 /* USER CODE BEGIN PV */
 CAN_RxHeaderTypeDef rx_header;
 CAN_TxHeaderTypeDef tx_header = {
-  .StdId = 0x200,
+  .StdId = 0x1FF,
   .ExtId = 0,
   .IDE = CAN_ID_STD,
   .RTR = CAN_RTR_DATA,
@@ -69,6 +68,7 @@ CAN_FilterTypeDef filter_config = {
 uint8_t rx_data[8];
 uint8_t tx_data[8];
 uint32_t can_tx_mailbox;
+int stop_flag = 1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

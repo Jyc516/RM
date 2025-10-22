@@ -48,6 +48,6 @@ float PID::calc(float _ref, float _fdb) {
         update_err_queue();
     }
 
-    float out =  kp * cur_err + kd * delta_err + ki * clamp(err_sum / 5, -i_max, i_max);
+    float out =  kp * cur_err + kd * delta_err + ki * clamp(err_sum, -i_max, i_max);
     return out_max == 0.f? out: clamp(out, -out_max, out_max);
 }

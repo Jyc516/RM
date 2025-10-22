@@ -8,6 +8,7 @@
 "rm\tim.o"
 "rm\stm32f4xx_it.o"
 "rm\stm32f4xx_hal_msp.o"
+"rm\pid.o"
 "rm\stm32f4xx_hal_can.o"
 "rm\stm32f4xx_hal_rcc.o"
 "rm\stm32f4xx_hal_rcc_ex.o"

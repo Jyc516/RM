@@ -537,6 +537,11 @@
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32f4xx_hal_msp.c</FilePath>
             </File>
+            <File>
+              <FileName>PID.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Core\Src\PID.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
