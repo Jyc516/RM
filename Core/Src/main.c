@@ -21,6 +21,7 @@
 #include "can.h"
 #include "tim.h"
 #include "gpio.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -44,6 +45,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+// 有关CAN通信
 CAN_RxHeaderTypeDef rx_header;
 CAN_TxHeaderTypeDef tx_header = {
   .StdId = 0x1FF,
@@ -68,7 +71,13 @@ CAN_FilterTypeDef filter_config = {
 uint8_t rx_data[8];
 uint8_t tx_data[8];
 uint32_t can_tx_mailbox;
-int stop_flag = 1;
+
+
+// 有关按键中断与电机控制标志
+int stop_flag;
+int has_switched;
+GPIO_PinState cur_key_state;
+GPIO_PinState pre_key_state;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -126,8 +135,12 @@ int main(void)
   HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
   HAL_TIM_Base_Start_IT(&htim6);
 
-  tx_data[2] = 0x00;
-  tx_data[3] = 0xFF;
+  // tx_data[2] = 0x00;
+  // tx_data[3] = 0xFF;
+
+    stop_flag = 1;
+    has_switched = 0;
+    pre_key_state = HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -137,6 +150,24 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+      cur_key_state = HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin);
+      if (cur_key_state == GPIO_PIN_SET) {
+          if (has_switched == 1) {continue;}
+          else if (pre_key_state == GPIO_PIN_RESET) {
+              pre_key_state = GPIO_PIN_SET;
+              continue;
+          }
+
+          stop_flag = 1 - stop_flag;
+          has_switched = 1;
+      }
+      else {
+          if (pre_key_state == GPIO_PIN_SET) {
+              pre_key_state = GPIO_PIN_RESET;
+              continue;
+          }
+          has_switched = 0;
+      }
   }
   /* USER CODE END 3 */
 }

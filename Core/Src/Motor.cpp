@@ -82,7 +82,7 @@ void M3508Motor::calc_ff_intensity(){
 void M3508Motor::handle(){
     fdb_speed = rotate_speed;
     fdb_angle = angle;
-    calc_ff_intensity();
+    // calc_ff_intensity();
 
     if (mode == TORQUE) {}
     else if (mode == SPEED) {

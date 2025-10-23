@@ -52,7 +52,11 @@ private:
 
     void calc_ff_intensity();
 public:
-    explicit M3508Motor(float _ratio, int _id): ratio(_ratio), ppid(0, 0, 0), spid(0, 0, 0), id(_id){};
+    explicit M3508Motor(float _ratio, int _id):
+        ratio(_ratio),
+        ppid(0, 0, 0),
+        spid(0, 0, 0, 5, 1.1f, 1, 0.1f),
+        id(_id){};
     void read_RxMsg(const uint8_t rx_data[8]);
     void write_TxMsg(uint8_t tx_data[8]);
 
