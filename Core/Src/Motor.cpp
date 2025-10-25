@@ -7,6 +7,9 @@
 #include <cmath>
 #include <algorithm>
 
+float low_init_angle;       // 用于手动更新最低位对应角度
+float out1, out2;
+
 float M3508Motor::normalize_angle(float angle, bool has_direction) {
     if (!has_direction) {
         while (angle >= 360.f) {
@@ -47,7 +50,7 @@ void M3508Motor::read_RxMsg(const uint8_t rx_data[]) {
 
 void M3508Motor::write_TxMsg(uint8_t tx_data[8]){
     int i = (id - 1) % 4 * 2;
-    int16_t output = int16_t(output_intensity / 20 * 16384);
+    int16_t output = int16_t(output_intensity);
     tx_data[i] = output >> 8;
     tx_data[i+1] = output & 0xFF;
 }
@@ -66,33 +69,40 @@ void M3508Motor::SetSpeed(float tgt_speed_, float ff_intensity_){
 }
 
 void M3508Motor::SetAngle(float tgt_angle_, float ff_speed_, float ff_intensity_){
+    // 须确保tgt_angle_是正确的（被归一化的）
+
     mode = POSITION_SPEED;
 
     tgt_angle = tgt_angle_;
     ff_intensity = ff_intensity_;
-    ff_speed = ff_speed_;
+    // ff_speed = ff_speed_;
 }
 
 void M3508Motor::calc_ff_intensity(){
-    float angle_from_top = normalize_angle(angle - 174.f, true); // 0 deg为上方位置
-    float torque = 0.5 * 9.8 * sin(angle_from_top);
-    ff_intensity = linear_mapping(torque, 3.f, 8.f);
+    float angle_from_top = normalize_angle(angle - low_init_angle - 180, true); // 0 deg为上方位置
+    angle_from_top = linear_mapping(angle_from_top, 180.f, 3.1415926f); // deg -> rad
+    float torque = 0.5 * 9.8 * sin(angle_from_top) * 0.05;
+    float ff_current = linear_mapping(torque, 3.f, 8.f);
+    ff_intensity = linear_mapping(ff_current, 20.f, 16384.f) * -1;
 }
 
 void M3508Motor::handle(){
     fdb_speed = rotate_speed;
     fdb_angle = angle;
-    // calc_ff_intensity();
+    calc_ff_intensity();
 
     if (mode == TORQUE) {}
     else if (mode == SPEED) {
         output_intensity = ff_intensity + spid.calc(tgt_speed, fdb_speed);
     }
     else if (mode == POSITION_SPEED) {
-        tgt_speed = ff_speed + ppid.calc(tgt_angle, fdb_angle);
-        output_intensity = ff_intensity + spid.calc(tgt_speed, fdb_speed);
+        // tgt_speed = ff_speed + ppid.calc(tgt_angle, fdb_angle);
+        // output_intensity = ff_intensity + spid.calc(tgt_speed, fdb_speed);
+        out1 = ppid.calc(tgt_angle, fdb_angle);
+        out2 = spid.calc(out1 + ff_speed, fdb_angle);
+        output_intensity = ff_intensity + out2;
     }
 }
 
 
-M3508Motor motor(19.2, 6);
+M3508Motor motor(19.2, 1);

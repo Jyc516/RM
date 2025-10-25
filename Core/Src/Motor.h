@@ -34,7 +34,8 @@ private:
     float tgt_angle, fdb_angle;
     float tgt_speed, fdb_speed;
     float output_intensity = 0.f;       // 扭矩输出接口
-    float ff_speed = 0.f, ff_intensity = 0.f;
+    const float ff_speed = 0.f;         // 前馈，设置目标速度？ff_speed暂时没用，置为常数0，SetAngle有注释化
+    float ff_intensity = 0.f;           // 解算设置前馈力矩
 
     enum control_mode {
         TORQUE,                 // 开环力矩控制
@@ -54,8 +55,8 @@ private:
 public:
     explicit M3508Motor(float _ratio, int _id):
         ratio(_ratio),
-        ppid(0, 0, 0),
-        spid(0, 0, 0, 5, 1.1f, 1, 0.1f),
+        ppid(25, 0, 0, 5, 0.0f, 100, 0.1f),
+        spid(44, 50, 31, 5, 15000.0f, 100, 0.1f),
         id(_id){};
     void read_RxMsg(const uint8_t rx_data[8]);
     void write_TxMsg(uint8_t tx_data[8]);
