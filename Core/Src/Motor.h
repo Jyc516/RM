@@ -45,19 +45,19 @@ private:
     control_mode mode = TORQUE;
 
     template<class T1, class T2>
-    static T2 linear_mapping(T1 org, T1 org_max, T2 res_max) {
-        return T2(org) / org_max * res_max;
+    static T2 linear_mapping(T1 org, T1 org_max, T2 res_max, T1 org_min=0, T2 res_min=0) {
+        return T2((org - org_min) * (res_max - res_min) / (org_max - org_min) + res_min);
     }
 
     static float normalize_angle(float angle, bool has_direction=false);
 
     void calc_ff_intensity();
 public:
-    explicit M3508Motor(float _ratio, int _id):
-        ratio(_ratio),
-        ppid(25, 0, 0, 5, 0.0f, 100, 0.1f),
-        spid(44, 50, 31, 5, 15000.0f, 100, 0.1f),
-        id(_id){};
+    explicit M3508Motor(float ratio_, int id_):
+        ratio(ratio_),
+        ppid(25, 0, 0, 50.f, 5, 1000.0f, 0.1f),
+        spid(44, 50, 31, 100.f, 5, 15000.0f, 0.1f),
+        id(id_){};
     void read_RxMsg(const uint8_t rx_data[8]);
     void write_TxMsg(uint8_t tx_data[8]);
 

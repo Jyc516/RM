@@ -37,13 +37,13 @@ private:
     void reset_err_queue();     // ref更新后重置err队列
     void update_err_queue();    // 计算新err并更新err队列
 public:
-    PID(float _kp, float _ki, float _kd, int _i_iter=5, float _out_max = 0.f, float _i_max=1.f, float _d_filter=0.1):
-        kp(_kp),
-        ki(_ki),
-        kd(_kd),
-        i_iter(_i_iter > 0? _i_iter: 5),
-        i_max(_i_max > 0.f? _i_max: 1.f),
-        d_filter(_d_filter > 0.f && _d_filter < 1.f? _d_filter: 0.1)
+    PID(float kp_, float ki_, float kd_, float i_max_, int i_iter_=5, float out_max_ = 0.f, float d_filter_=0.1):
+        kp(kp_),
+        ki(ki_),
+        kd(kd_),
+        i_max(i_max_ > 0.f? i_max_: 1.f),
+        i_iter(i_iter_ > 0? i_iter_: 5),
+        d_filter(d_filter_ > 0.f && d_filter_ < 1.f? d_filter_: 0.1)
     {
         err_head = new ErrNode{0.f, nullptr};
         ErrNode *cur = err_head;
@@ -54,7 +54,7 @@ public:
         cur->next = err_head;
         err_sum = 0.f;
 
-        set_out_max(_out_max);
+        set_out_max(out_max_);
     };
     ~PID() {
         ErrNode *cur = nullptr;
@@ -65,7 +65,7 @@ public:
         }
     }
 
-    void set_out_max(float _out_max);           // 设置out_max（为虚弱状态预留更新接口）
+    void set_out_max(float out_max_);           // 设置out_max（为虚弱状态预留更新接口）
     float calc(float _ref, float _fdb);
 };
 

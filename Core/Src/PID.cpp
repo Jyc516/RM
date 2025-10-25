@@ -28,20 +28,20 @@ void PID::update_err_queue() {
     err_head = err_head->next;
 }
 
-void PID::set_out_max(float _out_max) {
-    out_max = _out_max > 0.f? _out_max: 0.f;
+void PID::set_out_max(float out_max_) {
+    out_max = out_max_ > 0.f? out_max_: 0.f;
 }
 
-float PID::calc(float _ref, float _fdb) {
-    ref = _ref;
-    if (_fdb == fdb) {
+float PID::calc(float ref_, float fdb_) {
+    ref = ref_;
+    if (fdb_ == fdb) {
         pre_err = cur_err;
         cur_err = ref - fdb;
         delta_err = d_filter * (cur_err - pre_err) + (1 - d_filter) * delta_err;
         update_err_queue();
     }
     else {
-        fdb = _fdb;
+        fdb = fdb_;
         cur_err = ref - fdb;
         delta_err = 0;
         reset_err_queue();

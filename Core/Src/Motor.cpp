@@ -69,7 +69,7 @@ void M3508Motor::SetSpeed(float tgt_speed_, float ff_intensity_){
 }
 
 void M3508Motor::SetAngle(float tgt_angle_, float ff_speed_, float ff_intensity_){
-    // 须确保tgt_angle_是正确的（被归一化的）
+    // 使用者须确保tgt_angle_是正确且被归一化到0-360°的
 
     mode = POSITION_SPEED;
 
@@ -79,16 +79,16 @@ void M3508Motor::SetAngle(float tgt_angle_, float ff_speed_, float ff_intensity_
 }
 
 void M3508Motor::calc_ff_intensity(){
-    float angle_from_top = normalize_angle(angle - low_init_angle - 180, true); // 0 deg为上方位置
-    angle_from_top = linear_mapping(angle_from_top, 180.f, 3.1415926f); // deg -> rad
-    float torque = 0.5 * 9.8 * sin(angle_from_top) * 0.05;
-    float ff_current = linear_mapping(torque, 3.f, 8.f);
-    ff_intensity = linear_mapping(ff_current, 20.f, 16384.f) * -1;
+    float angle_from_bottom = normalize_angle(angle - low_init_angle);                             // 0 deg为下方位置
+    angle_from_bottom = linear_mapping(angle_from_bottom, 180.f, 3.1415926f);   // deg -> rad
+    float torque = 0.5 * 9.8 * sin(angle_from_bottom) * 0.05;
+    float ff_current = linear_mapping(torque, 3.f, 8.f, 1.f, 3.f);
+    ff_intensity = linear_mapping(ff_current, 20.f, 16384.f);
 }
 
 void M3508Motor::handle(){
     fdb_speed = rotate_speed;
-    fdb_angle = angle;
+    fdb_angle = normalize_angle(angle - low_init_angle);
     calc_ff_intensity();
 
     if (mode == TORQUE) {}
@@ -105,4 +105,4 @@ void M3508Motor::handle(){
 }
 
 
-M3508Motor motor(19.2, 1);
+M3508Motor motor(3591 / 187, 1);
