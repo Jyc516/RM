@@ -33,21 +33,21 @@ void PID::set_out_max(float out_max_) {
 }
 
 float PID::calc(float ref_, float fdb_) {
-    ref = ref_;
-    if (fdb_ == fdb) {
+    fdb = fdb_;
+    if (ref_ == ref) {
         pre_err = cur_err;
         cur_err = ref - fdb;
         delta_err = d_filter * (cur_err - pre_err) + (1 - d_filter) * delta_err;
         update_err_queue();
     }
     else {
-        fdb = fdb_;
+        ref = ref_;
         cur_err = ref - fdb;
         delta_err = 0;
         reset_err_queue();
         update_err_queue();
     }
 
-    float out =  kp * cur_err + kd * delta_err + ki * clamp(err_sum, -i_max, i_max);
+    float out =  kp * cur_err + kd * delta_err + ki * clamp(err_sum / i_iter, -i_max, i_max);
     return out_max == 0.f? out: clamp(out, -out_max, out_max);
 }

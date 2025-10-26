@@ -79,16 +79,16 @@ void M3508Motor::SetAngle(float tgt_angle_, float ff_speed_, float ff_intensity_
 }
 
 void M3508Motor::calc_ff_intensity(){
-    float angle_from_bottom = normalize_angle(angle - low_init_angle);                             // 0 deg为下方位置
-    angle_from_bottom = linear_mapping(angle_from_bottom, 180.f, 3.1415926f);   // deg -> rad
-    float torque = 0.5 * 9.8 * sin(angle_from_bottom) * 0.05;
-    float ff_current = linear_mapping(torque, 3.f, 8.f, 1.f, 3.f);
+    float rad_angle = linear_mapping(fdb_angle, 180.f, 3.1415926f);   // deg -> rad
+    float torque = 0.5 * 9.8 * sin(rad_angle) * 0.05;
+    // float ff_current = linear_mapping(torque, 3.f, 8.f, 1.f, 3.f);
+    float ff_current = linear_mapping(torque, 3.f, 8.f);
     ff_intensity = linear_mapping(ff_current, 20.f, 16384.f);
 }
 
 void M3508Motor::handle(){
     fdb_speed = rotate_speed;
-    fdb_angle = normalize_angle(angle - low_init_angle);
+    fdb_angle = normalize_angle(angle - low_init_angle, true);        // 0 deg为下方位置
     calc_ff_intensity();
 
     if (mode == TORQUE) {}
@@ -96,7 +96,7 @@ void M3508Motor::handle(){
         output_intensity = ff_intensity + spid.calc(tgt_speed, fdb_speed);
     }
     else if (mode == POSITION_SPEED) {
-        // tgt_speed = ff_speed + ppid.calc(tgt_angle, fdb_angle);
+        tgt_speed = ff_speed + ppid.calc(tgt_angle, fdb_angle);
         // output_intensity = ff_intensity + spid.calc(tgt_speed, fdb_speed);
         out1 = ppid.calc(tgt_angle, fdb_angle);
         out2 = spid.calc(out1 + ff_speed, fdb_angle);
@@ -105,4 +105,4 @@ void M3508Motor::handle(){
 }
 
 
-M3508Motor motor(3591 / 187, 1);
+M3508Motor motor(3591.f / 187, 1);

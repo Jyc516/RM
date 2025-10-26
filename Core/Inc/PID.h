@@ -37,7 +37,7 @@ private:
     void reset_err_queue();     // ref更新后重置err队列
     void update_err_queue();    // 计算新err并更新err队列
 public:
-    PID(float kp_, float ki_, float kd_, float i_max_, int i_iter_=5, float out_max_ = 0.f, float d_filter_=0.1):
+    PID(float kp_, float ki_, float kd_, float i_max_, int i_iter_=100, float out_max_ = 0.f, float d_filter_=0.1):
         kp(kp_),
         ki(ki_),
         kd(kd_),

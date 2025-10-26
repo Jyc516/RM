@@ -55,8 +55,8 @@ private:
 public:
     explicit M3508Motor(float ratio_, int id_):
         ratio(ratio_),
-        ppid(25, 0, 0, 50.f, 5, 1000.0f, 0.1f),
-        spid(44, 50, 31, 100.f, 5, 15000.0f, 0.1f),
+        ppid(33, 220, 30000, 300.f, 10, 540.0f, 0.92f),
+        spid(91, 21, 67, 120.f, 8, 15000.0f, 0.1f),
         id(id_){};
     void read_RxMsg(const uint8_t rx_data[8]);
     void write_TxMsg(uint8_t tx_data[8]);
