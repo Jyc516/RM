@@ -82,7 +82,7 @@ void M3508Motor::calc_ff_intensity(){
     float rad_angle = linear_mapping(fdb_angle, 180.f, 3.1415926f);   // deg -> rad
     float torque = 0.5 * 9.8 * sin(rad_angle) * 0.05;
     // float ff_current = linear_mapping(torque, 3.f, 8.f, 1.f, 3.f);
-    float ff_current = linear_mapping(torque, 3.f, 8.f);
+    float ff_current = linear_mapping(torque, 3.f, 8.2f);
     ff_intensity = linear_mapping(ff_current, 20.f, 16384.f);
 }
 
